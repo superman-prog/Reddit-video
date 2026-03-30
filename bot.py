@@ -84,9 +84,11 @@ def get_random_clip():
 # ── HELPERS ───────────────────────────────────────────────────────────────────
 def download_yt(url, out):
     opts = {
-        "format": "bestvideo+bestaudio/best",
+        # 'best' acts as a fallback if the combined 'bestvideo+bestaudio' fails
+        "format": "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best",
         "outtmpl": str(out),
         "quiet": True,
+        "merge_output_format": "mp4",
         "postprocessors": [{
             "key": "FFmpegVideoConvertor",
             "preferedformat": "mp4",
@@ -96,7 +98,7 @@ def download_yt(url, out):
         opts["cookiefile"] = str(COOKIES_FILE)
     with yt_dlp.YoutubeDL(opts) as ydl:
         ydl.download([url])
-
+        
 def get_dur(path):
     r = subprocess.run(
         ["ffprobe", "-v", "0", "-show_entries", "format=duration",

@@ -151,37 +151,40 @@ async def recv_vid(u, c):
 
 def main():
     app = Application.builder().token(BOT_TOKEN).build()
-    app.add_handler(ConversationHandler(
+    
+    conv = ConversationHandler(
         entry_points=[CommandHandler("new", cmd_new)],
         states={
-            WAIT_TITLE: [MessageHandler(filters.TEXT & ~filters.COMMAND, got_title)],
-            WAIT_STORY: [MessageHandler(filters.TEXT & ~filters.COMMAND, got_story)],
-            SELECT_MODE: [CallbackQueryHandler(mode_cb)],
-            WAIT_IMAGE: [MessageHandler(filters.PHOTO | filters.Document.IMAGE, got_image)],
+            WAIT_TITLE:   [MessageHandler(filters.TEXT & ~filters.COMMAND, got_title)],
+            WAIT_STORY:   [MessageHandler(filters.TEXT & ~filters.COMMAND, got_story)],
+            SELECT_MODE:  [CallbackQueryHandler(mode_cb)],
+            WAIT_IMAGE:   [MessageHandler(filters.PHOTO | filters.Document.IMAGE, got_img)], # Changed to got_img
             WAIT_CONFIRM: [CallbackQueryHandler(conf_cb, pattern="^[yn]$")],
-        }, fallbacks=[CommandHandler("cancel", lambda u,c: ConversationHandler.END)]
-    ))
+        },
+        fallbacks=[CommandHandler("cancel", lambda u,c: ConversationHandler.END)],
+    )
+
+    app.add_handler(conv)
+    app.add_handler(CommandHandler("start", lambda u, c: u.message.reply_text("Welcome! Use /new to start.")))
     app.add_handler(CommandHandler("addclip", lambda u,c: (c.user_data.update({"ac":True}), u.message.reply_text("Link or Video:"))))
     app.add_handler(MessageHandler(filters.VIDEO | filters.Document.VIDEO | filters.TEXT, recv_vid))
 
-    # --- RENDER KEEP-ALIVE START ---
+    # --- RENDER KEEP-ALIVE SERVER ---
     from flask import Flask
     from threading import Thread
-    import logging
 
     web_app = Flask('')
     @web_app.route('/')
-    def home(): return "Bot is Awake"
+    def home(): return "Bot is Alive"
 
     def run_web():
         web_app.run(host='0.0.0.0', port=10000)
 
-    print("🌐 Starting Keep-Alive Server...")
     Thread(target=run_web).start()
-    # --- RENDER KEEP-ALIVE END ---
+    # -------------------------------
 
-    print("🚀 Bot is Polling...")
-    app.run_polling()
+    print("✅ Bot is Polling on Render...")
+    app.run_polling(drop_pending_updates=True)
 
 if __name__ == "__main__":
     main()

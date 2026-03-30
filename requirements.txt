@@ -2,3 +2,5 @@ python-telegram-bot
 edge-tts
 yt-dlp
 flask
+requests
+Pillow

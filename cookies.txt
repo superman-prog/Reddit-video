@@ -1,0 +1,11 @@
+# Netscape HTTP Cookie File
+# https://curl.haxx.se/rfc/cookie_spec.html
+# This is a generated file! Do not edit.
+
+.youtube.com	TRUE	/	TRUE	1790414113	__Secure-YNID	17.YT=hdo2m5TkPz5OuqsdXtvt19kyHIY8HlMZ3eA998UwL5lTxr9NmWAWF-6WEE2pMH7uI8N6AjjJNwjuOU_0YfmKteD1HkEHbvVf9wcBo3q3f0JPoIw8wcgEfQbB4zR_uqxWnnFXi-DbIwOZmGlEFg_OmWeazkAMridxjdXH4rS2l8qm2XtovthmtMyrRDHGzQHH4yqODbIqkFvZmJmjEfEhyahgaRtBcxV0N4c1P7Cj0iHk3GhGQixa5cj4nTkYmYcjrynKYXSLEoLr0nBDkPHlNFJ4pT2DGQMLGSu2zskCDp0hj_6TuEh1BUoqebWG4xjCYU_rjYnFMo5efwNRejLTjQ
+.youtube.com	TRUE	/	TRUE	1774863914	GPS	1
+.youtube.com	TRUE	/	TRUE	0	YSC	QfwKq2MNcog
+.youtube.com	TRUE	/	TRUE	1790414114	VISITOR_INFO1_LIVE	JeLXore-9dg
+.youtube.com	TRUE	/	TRUE	1790414114	VISITOR_PRIVACY_METADATA	CgJJThIEGgAgQQ%3D%3D
+.youtube.com	TRUE	/	TRUE	1809422115	PREF	f6=40000000&tz=Asia.Kolkata
+  

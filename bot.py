@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+ #!/usr/bin/env python3
 import os, json, asyncio, subprocess, random, logging
 import yt_dlp
 from pathlib import Path
